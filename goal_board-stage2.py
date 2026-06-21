@@ -37,3 +37,52 @@ def validate_goal_input(goal_data):
     else:
         print("Цель прошла валидацию")
     return is_valid, validator.errors
+
+# === Stage 2: Добавь модели данных и функции валидации пользовательского ввода ===
+# Project: GoalBoard
+class GoalValidator:
+    def __init__(self):
+        self.errors = []
+
+    def validate_goal(self, title: str, deadline: str) -> bool:
+        if not title.strip():
+            self.errors.append("Заголовок цели не может быть пустым")
+            return False
+        try:
+            from datetime import datetime
+            today = datetime.now().date()
+            deadline_date = datetime.strptime(deadline, "%Y-%m-%d").date()
+            if deadline_date < today:
+                self.errors.append("Дата окончания должна быть не раньше сегодняшней")
+                return False
+        except ValueError as e:
+            self.errors.append(f"Ошибка формата даты: {e}")
+            return False
+        self.errors = []
+        return True
+
+    def validate_metric(self, name: str, value: float) -> bool:
+        if not name.strip():
+            self.errors.append("Название метрики не может быть пустым")
+            return False
+        try:
+            val_float = float(value)
+            if val_float < 0:
+                self.errors.append("Значение метрики должно быть неотрицательным числом")
+                return False
+        except ValueError as e:
+            self.errors.append(f"Ошибка формата числа: {e}")
+            return False
+        self.errors = []
+        return True
+
+    def validate_task(self, title: str, status: str) -> bool:
+        if not title.strip():
+            self.errors.append("Заголовок задачи не может быть пустым")
+            return False
+        valid_statuses = {"todo", "in_progress", "done"}
+        if status.lower() not in valid_statuses:
+            self.errors.append(f"Статус должен быть одним из: {', '.join(valid_statuses)}")
+            return False
+        self.errors = []
+        return True

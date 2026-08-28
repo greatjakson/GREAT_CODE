@@ -1,0 +1,47 @@
+# === Stage 34: Добавь простую систему шаблонов для быстрого создания записей ===
+# Project: GoalBoard
+TEMPLATES = {
+    "task": {
+        "type": "task",
+        "title": "Задача",
+        "description": "Описание задачи",
+        "priority": "medium",
+        "deadline": None,
+        "estimated_hours": 0,
+        "actual_hours": 0,
+        "notes": "",
+        "status": "todo",
+        "tags": [],
+    },
+    "milestone": {
+        "type": "milestone",
+        "title": "Веха",
+        "description": "Описание вехи",
+        "target_date": None,
+        "completed": False,
+        "notes": "",
+        "status": "pending",
+        "tags": [],
+    },
+    "meeting": {
+        "type": "meeting",
+        "title": "Встреча",
+        "description": "Цель встречи",
+        "scheduled_date": None,
+        "location": "",
+        "attendees": [],
+        "notes": "",
+        "status": "scheduled",
+        "tags": [],
+    },
+    "idea": {
+        "type": "idea",
+        "title": "Идея",
+        "description": "Описание идеи",
+        "inspiration": "",
+        "feasibility": "speculative",
+        "notes": "",
+        "status": "brainstorm",
+        "tags": [],
+    },
+}
